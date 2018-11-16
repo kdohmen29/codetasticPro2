@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "exampledb",
+    "database": "cinchdb",
     "host": "localhost",
     "port": 8889,
     "dialect": "mysql"
