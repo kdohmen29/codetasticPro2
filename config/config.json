@@ -4,7 +4,7 @@
     "password": "root",
     "database": "cinchdb",
     "host": "localhost",
-    "port": 8889,
+    "port": 3307,
     "dialect": "mysql"
   },
   "test": {
