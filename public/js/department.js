@@ -5,7 +5,7 @@ $(document).ready(function() {
     var departmentContainer = $(".department-container");
     // Adding event listeners to the form to create a new object, and the button to delete
     // an Author
-    $(document).on("submit", "#department-form", handleDepartmentFormSubmit);
+    $(document).on("click", "#create-department-button", handleDepartmentFormSubmit);
     $(document).on("click", ".delete-department", handleDeleteButtonPress);
   
     // Getting the initial list of departments
@@ -15,12 +15,12 @@ $(document).ready(function() {
     function handleDepartmentFormSubmit(event) {
       event.preventDefault();
       // Don't do anything if the name fields hasn't been filled out
-      if (!nameInput.val().trim().trim()) {
+      if (nameInput.val().trim() == null) {
         return;
       }
       // Calling the upsertAuthor function and passing in the value of the name input
       upsertDepartment({
-        name: nameInput
+        text: nameInput
           .val()
           .trim()
       });
@@ -28,7 +28,7 @@ $(document).ready(function() {
   
     // A function for creating an author. Calls getdepartments upon completion
     function upsertDepartment(departmentData) {
-      $.post("/api/departments", departmentData)
+      $.post("/api/department", departmentData)
         .then(getDepartments);
     }
   
@@ -37,17 +37,16 @@ $(document).ready(function() {
       console.log(departmentData);
       var newTr = $("<tr>");
       newTr.data("department", departmentData);
-      newTr.append("<td>" + departmentData.name + "</td>");
-      newTr.append("<td># of posts will display when we learn joins in the next activity!</td>");
+      newTr.append("<td>" + departmentData.text + "</td>");
       newTr.append("<td><a href='/blog?department_id=" + departmentData.id + "'>Go to Posts</a></td>");
-      newTr.append("<td><a href='/cms?department_id=" + departmentData.id + "'>Create a Post</a></td>");
+      newTr.append("<td><a href='/createpost'>Create a Post</a></td>");
       newTr.append("<td><a style='cursor:pointer;color:red' class='delete-department'>Delete Department</a></td>");
       return newTr;
     }
   
     // Function for retrieving Departments and getting them ready to be rendered to the page
     function getDepartments() {
-      $.get("/api/departments", function(data) {
+      $.get("/api/department", function(data) {
         var rowsToAdd = [];
         for (var i = 0; i < data.length; i++) {
           rowsToAdd.push(createDepartmentRow(data[i]));
