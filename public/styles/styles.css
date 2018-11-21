@@ -106,7 +106,12 @@ figure {
 }
 figure img {
   margin: 3em auto 0;
-  width: 440px;
+  width: 344px;
+}
+
+.midii {
+  width: 344px !important;
+  margin: 142px auto;
 }
 
 @media screen and (min-width: 820px) {
@@ -143,8 +148,13 @@ figure img {
     border: 2px solid #47FFB1;
     border-radius: 50px;
   }
-  main {
-    flex-flow: row;
+
+  .mid {
+    margin: 133px auto;
+  }
+
+  .hero container {
+    margin-top: 133px;
   }
   .hero {
     text-align: left;
@@ -164,9 +174,19 @@ figure img {
   .hero a {
     background: #FF6347;
   }
-  .figure img {
-    width: 721px;
-    float: right;
+  
+  figure img {
+    width: 596px;
     margin: 0;
   }
+
+}
+
+.device {
+  float: right;
+}
+
+.midi {
+  width: 713px !important;
+  margin: 142px auto;
 }
