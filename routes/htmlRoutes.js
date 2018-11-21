@@ -17,10 +17,28 @@ module.exports = function (app) {
       });
     });
   });
-
+  
+ html-routes
   app.get("/createpost", function (req, res) {
     res.render("createpost", {});
   });
+
+    // Load example page and pass in an example by id
+    app.get("/store/", function(req, res) {
+      db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+        res.render("store", {
+          example: dbExample
+        });
+      });
+    });
+
+    app.get("/logIn/", function(req, res) {
+      db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+        res.render("logIn", {
+          example: dbExample
+        });
+      });
+    });
 
   // Load example page and pass in an example by id
   app.get("/blog", function (req, res) {
