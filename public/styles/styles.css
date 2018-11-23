@@ -114,6 +114,28 @@ figure img {
   margin: 142px auto;
 }
 
+#signin {
+  width: 100%;
+  margin: 50px 20px;
+}
+
+#signup {
+  width: 100%;
+  margin: 50px 20px;
+}
+
+form input {
+  width: 90%;
+}
+
+form .btn {
+  margin-top: 100px;
+  background-color: #FF6347;
+  color: white;
+  border-radius: 50px;
+}
+
+
 @media screen and (min-width: 820px) {
     .logo {
       float: left;
@@ -189,4 +211,33 @@ figure img {
 .midi {
   width: 713px !important;
   margin: 142px auto;
+}
+
+#signin {
+  width: 639px;;
+  margin: 209px auto;
+}
+
+#signup {
+  width:639px;
+  margin: 209px auto;
+
+}
+
+form input {
+  width: 639px;
+  margin: 0 auto;
+}
+
+form .btn {
+  margin: 92px 245px; 
+  background-color: #FF6347;
+  color: white;
+  border-radius: 50px;
+  width: 148px; 
+}
+
+.containerDash {
+  margin: 204px auto;
+  text-align: center;
 }
