@@ -30,6 +30,7 @@ module.exports = function (app) {
     });
   });
   
+ html-routes
   app.get("/createpost", function (req, res) {
     res.render("createpost", {});
   });
