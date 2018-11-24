@@ -4,15 +4,42 @@ var authController = require('../controller/authcontroller.js');
 
 
 module.exports = function (app, passport) {
-  // Load index page
-  app.get("/", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
 
-module.exports = function (app) {
-  // Load index page
+  
+    app.get('/signup', authController.signup);
+
+    app.get('/signin', authController.signin);
+
+    app.post('/signup', passport.authenticate('local-signup', {
+      successRedirect: '/dashboard',
+
+      failureRedirect: '/signup'
+    }
+
+    ));
+
+    app.get('/dashboard', isLoggedIn, authController.dashboard);
+
+    app.get('/logout', authController.logout);
+
+    // Load example page and pass in an example by id
+    app.get("/store/", function (req, res) {
+      db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
+        res.render("store", {
+          example: dbExample
+        });
+      });
+    });
+
+
+    app.post('/signin', passport.authenticate('local-signin', {
+      successRedirect: '/dashboard',
+
+      failureRedirect: '/signin'
+    }
+
+    ));
+
   app.get("/", function (req, res) {
     db.Department.findAll({}).then(function (dbDepartments) {
       //connects to index.handlebars 
@@ -37,48 +64,8 @@ module.exports = function (app) {
 
 
 
-  app.get('/signup', authController.signup);
-
-  app.get('/signin', authController.signin);
-
-  app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/dashboard',
-
-    failureRedirect: '/signup'
-  }
-
-  ));
-
-  app.get('/dashboard', isLoggedIn, authController.dashboard);
-
-  app.get('/logout', authController.logout);
-
-  // Load example page and pass in an example by id
-  app.get("/store/", function (req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.render("store", {
-        example: dbExample
-      });
-    });
-  });
 
 
-  app.post('/signin', passport.authenticate('local-signin', {
-    successRedirect: '/dashboard',
-
-    failureRedirect: '/signin'
-  }
-
-  ));
-
-
-
-  // Load example page and pass in an example by id
-
-  app.get("/example/:id", function (req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.render("example", {
-        example: dbExample
 
   app.get("/blog", function (req, res) {
     db.Department.findOne({
@@ -110,5 +97,5 @@ module.exports = function (app) {
   }
 };
 
-};
+
 
