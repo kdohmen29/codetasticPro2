@@ -3,3 +3,6 @@ CREATE DATABASE cinchdb;
 
 DROP DATABASE IF EXISTS testdb;
 CREATE DATABASE testdb;
+
+DROP DATABASE IF EXISTS sequelizePassportDB;
+CREATE DATABASE sequelizePassportDB;
