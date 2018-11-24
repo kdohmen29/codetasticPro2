@@ -5,7 +5,7 @@
     "database": "cinchdb",
     "database": "sequelizePassportDB",
     "host": "localhost",
-    "port": 3307,
+    "port": 8889,
     "dialect": "mysql"
   },
   "test": {
@@ -17,7 +17,11 @@
     "logging": false
   },
   "production": {
-    "use_env_variable": "JAWSDB_URL",
+    "username": "gse939prnvs9u55r",
+    "password": "qqydwg3qkt0m6ivh",
+    "database": "vdxwjbuo5163pjtb",
+    "host": "o677vxfi8ok6exrd.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "port": 3306,
     "dialect": "mysql"
   }
 }

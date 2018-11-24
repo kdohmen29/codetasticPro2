@@ -2,6 +2,7 @@ var db = require("../models");
 var authController = require('../controller/authcontroller.js');
 
 
+
 module.exports = function (app, passport) {
   // Load index page
   app.get("/", function (req, res) {
@@ -9,8 +10,29 @@ module.exports = function (app, passport) {
       res.render("index", {
         msg: "Welcome!",
         examples: dbExamples
+
+module.exports = function (app) {
+  // Load index page
+  app.get("/", function (req, res) {
+    db.Department.findAll({}).then(function (dbDepartments) {
+      //connects to index.handlebars 
+      res.render("index", {});
+    });
+  });
+  app.get("/departments", function (req, res) {
+    db.Department.findAll({}).then(function (dbDepartments) {
+      //connects to index.handlebars 
+      res.render("department", {
+        msg: "This is a test",
+        // examples: dbExamples
+
       });
     });
+  });
+  
+ html-routes
+  app.get("/createpost", function (req, res) {
+    res.render("createpost", {});
   });
 
 
@@ -52,10 +74,21 @@ module.exports = function (app, passport) {
 
 
   // Load example page and pass in an example by id
+
   app.get("/example/:id", function (req, res) {
     db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
       res.render("example", {
         example: dbExample
+
+  app.get("/blog", function (req, res) {
+    db.Department.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (dbDepartments) {
+      res.render("posts", {
+        example: dbDepartments
+
       });
     });
   });
@@ -64,6 +97,7 @@ module.exports = function (app, passport) {
   app.get("*", function (req, res) {
     res.render("404");
   });
+
 
   function isLoggedIn(req, res, next) {
 
@@ -75,3 +109,6 @@ module.exports = function (app, passport) {
 
   }
 };
+
+};
+
