@@ -49,6 +49,13 @@ module.exports = function(sequelize, Sequelize) {
  
  
     });
+
+    User.associate = function(models) {
+        // Associating Users with Items
+        // When an Users is deleted, also delete any associated Items
+        User.hasMany(models.Item, {
+        });
+      };
  
     return User;
  
