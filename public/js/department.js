@@ -18,6 +18,7 @@ $(document).ready(function() {
       if (nameInput.val().trim() == null) {
         return;
       }
+      
       // Calling the upsertAuthor function and passing in the value of the name input
       upsertDepartment({
         text: nameInput
