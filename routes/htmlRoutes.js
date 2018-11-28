@@ -4,27 +4,47 @@ var authController = require('../controller/authcontroller.js');
 
 
 module.exports = function (app, passport) {
-  // Load index page
-  app.get("/", function (req, res) {
-    db.Department.findAll({}).then(function (dbDepartments) {
-      //connects to index.handlebars 
-      res.render("index", {});
-    });
-  });
-  app.get("/departments", function (req, res) {
-    db.Department.findAll({}).then(function (dbDepartments) {
-      //connects to index.handlebars 
-      res.render("department", {
-        msg: "This is a test",
-        // examples: dbExamples
 
+  // Load index page
+
+
+  
+    app.get('/signup', authController.signup);
+
+    app.get('/signin', authController.signin);
+
+    app.post('/signup', passport.authenticate('local-signup', {
+      successRedirect: '/dashboard',
+
+      failureRedirect: '/signup'
+    }
+
+    ));
+
+    app.get('/dashboard', isLoggedIn, authController.dashboard);
+
+    app.get('/logout', authController.logout);
+
+    // Load example page and pass in an example by id
+    app.get("/store/", function (req, res) {
+      db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
+        res.render("store", {
+          example: dbExample
+        });
       });
     });
-  });
 
-  app.get("/createpost", function (req, res) {
-    res.render("createpost", {});
-  });
+
+    app.post('/signin', passport.authenticate('local-signin', {
+      successRedirect: '/dashboard',
+
+      failureRedirect: '/signin'
+    }
+
+    ));
+
+r
+  
 
 
 
@@ -71,6 +91,7 @@ module.exports = function (app, passport) {
 
 
 
+
   // Render 404 page for any unmatched routes
   app.get("*", function (req, res) {
     res.render("404");
@@ -86,4 +107,5 @@ module.exports = function (app, passport) {
     res.redirect('/signin');
 
   }
+
 };
