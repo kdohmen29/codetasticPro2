@@ -37,6 +37,8 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app, passport);
 
+
+
 require('./config/passport/passport.js')(passport, models.user);
 
 var syncOptions = { force: false };
