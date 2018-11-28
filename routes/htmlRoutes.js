@@ -62,7 +62,8 @@ r
 
   app.get('/dashboard', isLoggedIn, authController.dashboard);
 
-  app.get('/logout', authController.logout);
+  app.get('/logout', authController.logout); 
+  
 
   // Load example page and pass in an example by id
   app.get("/store/", function (req, res) {
