@@ -26,9 +26,9 @@ $(document).ready(function() {
       });
     }
   
-    // A function for creating an author. Calls getdepartments upon completion
+    // A function for creating an Department. Calls getdepartments upon completion
     function upsertDepartment(departmentData) {
-      $.post("/api/department", departmentData)
+      $.post("/api/departments", departmentData)
         .then(getDepartments);
     }
   
@@ -38,7 +38,7 @@ $(document).ready(function() {
       var newTr = $("<tr>");
       newTr.data("department", departmentData);
       newTr.append("<td>" + departmentData.text + "</td>");
-      newTr.append("<td><a href='/blog?department_id=" + departmentData.id + "'>Go to Posts</a></td>");
+      newTr.append("<td><a href='/api/departments" + departmentData.id + "'>Go to Posts</a></td>");
       newTr.append("<td><a href='/createpost'>Create a Post</a></td>");
       newTr.append("<td><a style='cursor:pointer;color:red' class='delete-department'>Delete Department</a></td>");
       return newTr;
