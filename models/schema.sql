@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS cinchdb;
+
 CREATE DATABASE cinchdb;
