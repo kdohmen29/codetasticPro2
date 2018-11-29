@@ -37,13 +37,18 @@ $(document).ready(function() {
     function createDepartmentRow(departmentData) {
       console.log(departmentData);
       var newTr = $("<tr>");
+      
       newTr.data("department", departmentData);
       newTr.append("<td>" + departmentData.text + "</td>");
-      newTr.append("<td><a href='/api/departments" + departmentData.id + "'>Go to Posts</a></td>");
-
-
+      newTr.append("<td><a href='/api/departments/:" + departmentData.id + "'>Go to Posts</a></td>");
+      
+  
+      
+      
+      
+      
       // These are for deleting and creating posts
-
+      
       // newTr.append("<td><a href='/createpost'>Create a Post</a></td>");
       // newTr.append("<td><a style='cursor:pointer;color:red' class='delete-department'>Delete Department</a></td>");
       return newTr;
@@ -60,6 +65,7 @@ $(document).ready(function() {
         nameInput.val("");
       });
     }
+    
   
     // A function for rendering the list of departments to the page
     function renderDepartmentList(rows) {
