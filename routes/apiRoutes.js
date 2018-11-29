@@ -3,41 +3,9 @@ var db = require("../models");
 
 
 module.exports = function (app) {
-  // Get all examples
-  app.get("/api/examples", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
-      res.json(dbExamples);
-    });
-  });
-
-  // Create a new example
-  app.post("/api/examples", function (req, res) {
-    db.Example.create(req.body).then(function (dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-
-
-  //create Oath passport
-  app.get('/api/passport', function (req, res) {
-
-    res.send('Welcome to Passport with Sequelize');
-
-  });
-
- 
-
-
-  // Delete an example by id
-  app.delete("/api/examples/:id", function (req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.json(dbExample);
-
-module.exports = function (app) {
-  // Get all examples
-  app.get("/api/department", function(req, res) {
-    db.Department.findAll({}).then(function(dbDepartment) {
+  // Get all departments
+  app.get("/api/department", function (req, res) {
+    db.Department.findAll({}).then(function (dbDepartment) {
       res.json(dbDepartment);
     });
   });
@@ -53,16 +21,18 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/api/department", function (req, res) {
-    // Create an Author with the data available to us in req.body
+  app.post("/api/createpost", function (req, res) {
+    // Create a post with the data available to us in req.body
     console.log(req.body);
-    db.Department.create(req.body).then(function (dbDepartment) {
-      res.json(dbDepartment);
+    db.Item.create(req.body).then(function (dbItem) {
+      res.json(dbItem);
 
     });
+
   });
 
 }
 })
 })
 }
+

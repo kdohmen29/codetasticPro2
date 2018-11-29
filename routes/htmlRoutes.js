@@ -4,28 +4,66 @@ var authController = require('../controller/authcontroller.js');
 
 
 
+
 module.exports = function (app, passport) {
+
   // Load index page
-  app.get("/", function (req, res) {
-    db.Department.findAll({}).then(function (dbDepartments) {
-      //connects to index.handlebars 
-      res.render("index", {});
+ app.get("/", function (req, res) {
+  db.Department.findAll({}).then(function (dbDepartments) {
+    //connects to index.handlebars
+    res.render("index", {});
+  });
+});
+app.get("/departments", function (req, res) {
+  db.Department.findAll({}).then(function (dbDepartments) {
+    //connects to index.handlebars
+    res.render("department", {
+      msg: "This is a test",
+      // examples: dbExamples
+
     });
   });
-  app.get("/departments", function (req, res) {
-    db.Department.findAll({}).then(function (dbDepartments) {
-      //connects to index.handlebars 
-      res.render("department", {
-        msg: "This is a test",
-        // examples: dbExamples
+});
 
+app.get("/createpost", function (req, res) {
+  res.render("createpost", {});
+});
+
+
+  
+    app.get('/signup', authController.signup);
+
+    app.get('/signin', authController.signin);
+
+    app.post('/signup', passport.authenticate('local-signup', {
+      successRedirect: '/dashboard',
+
+      failureRedirect: '/signup'
+    }
+
+    ));
+
+    app.get('/dashboard', isLoggedIn, authController.dashboard);
+
+    app.get('/logout', authController.logout);
+
+    // Load example page and pass in an example by id
+    app.get("/store/", function (req, res) {
+      db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
+        res.render("store", {
+          example: dbExample
+        });
       });
     });
-  });
-  
-  app.get("/createpost", function (req, res) {
-    res.render("createpost", {});
-  });
+
+
+    app.post('/signin', passport.authenticate('local-signin', {
+      successRedirect: '/dashboard',
+
+      failureRedirect: '/signin'
+    }
+
+    ));
 
 
 
@@ -34,32 +72,38 @@ module.exports = function (app, passport) {
   app.get('/signin', authController.signin);
 
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/dashboard',
+      successRedirect: '/dashboard',
 
-    failureRedirect: '/signup'
-  }
+      failureRedirect: '/signup'
+    }
 
   ));
 
   app.get('/dashboard', isLoggedIn, authController.dashboard);
 
-  app.get('/logout', authController.logout);
+  app.get('/logout', authController.logout); 
+  
 
   // Load example page and pass in an example by id
   app.get("/store/", function (req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
+    db.Example.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (dbExample) {
       res.render("store", {
         example: dbExample
       });
     });
   });
+ 
 
 
   app.post('/signin', passport.authenticate('local-signin', {
-    successRedirect: '/dashboard',
+      successRedirect: '/dashboard',
 
-    failureRedirect: '/signin'
-  }
+      failureRedirect: '/signin'
+    }
 
   ));
 
@@ -79,5 +123,3 @@ module.exports = function (app, passport) {
 
   }
 };
-  
-
