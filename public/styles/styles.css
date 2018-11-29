@@ -238,6 +238,10 @@ form .btn {
 }
 
 .containerDash {
-  margin: 204px auto;
+  margin: 90px auto;
   text-align: center;
+}
+
+.card {
+  margin: 20px 10% !important;
 }

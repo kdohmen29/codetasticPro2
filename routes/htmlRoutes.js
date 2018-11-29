@@ -3,6 +3,8 @@ var authController = require('../controller/authcontroller.js');
 
 
 
+
+
 module.exports = function (app, passport) {
 
   // Load index page
@@ -105,8 +107,6 @@ app.get("/createpost", function (req, res) {
 
   ));
 
-
-  
   // Render 404 page for any unmatched routes
   app.get("*", function (req, res) {
     res.render("404");
