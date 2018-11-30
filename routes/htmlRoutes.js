@@ -24,6 +24,7 @@ module.exports = function (app, passport) {
       });
     });
   });
+  
 
   app.get("/createpost", function (req, res) {
     db.Department.findAll({attributes:["text","id"],raw : true}).then(function (dbDepartments) {
