@@ -26,7 +26,13 @@ module.exports = function (app, passport) {
   });
 
   app.get("/createpost", function (req, res) {
-    res.render("createpost", {});
+    db.Department.findAll({attributes:["text","id"],raw : true}).then(function (dbDepartments) {
+      //connects to index.handlebars
+      var hdblsObj = {departments:dbDepartments}
+      console.log(hdblsObj);
+      
+      res.render("createpost", hdblsObj);
+      });
   });
 
 
