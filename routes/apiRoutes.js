@@ -29,6 +29,13 @@ module.exports = function (app) {
 
     });
 
+    app.get("/api/createpost", function (req, res) {
+      db.Item.findAll({}).then(function (dbItem) {
+        res.json(dbItem);
+      });
+    });
+  
+
   });
 
 }

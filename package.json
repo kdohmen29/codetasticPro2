@@ -1,6 +1,6 @@
 {
   "name": "node-handlebars-boilerplate",
-  "engines":{
+  "engines": {
     "node": "10.5.0"
   },
   "version": "1.0.0",
