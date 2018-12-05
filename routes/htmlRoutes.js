@@ -30,11 +30,31 @@ module.exports = function (app, passport) {
     db.Department.findAll({attributes:["text","id"],raw : true}).then(function (dbDepartments) {
       //connects to index.handlebars
       var hdblsObj = {departments:dbDepartments}
-      console.log(hdblsObj);
       
       res.render("createpost", hdblsObj);
-      });
+
+    });
   });
+
+  app.get("/createpost", function (req, res) {
+    db.Department.findAll({attributes:["text","id"],raw : true}).then(function (dbDepartments) {
+      //connects to index.handlebars
+      var hdblsObj = {departments:dbDepartments}
+      
+      res.render("posts", hdblsObj);
+    });
+  });
+  
+  app.get("/api/departments/:id", function(req,res){
+    db.Item.findAll({where: {
+      DepartmentId: req.params.id
+    }}).then(function(itemData){
+      var hdblsObj = {item:itemData}
+      
+      console.log(hdblsObj);
+      res.render("posts", hdblsObj)
+    })
+  })
 
 
 
@@ -55,10 +75,10 @@ module.exports = function (app, passport) {
   app.get('/logout', authController.logout);
 
   // Load example page and pass in an example by id
-  app.get("/store/", function (req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.render("store", {
-        example: dbExample
+  app.get("/api/departments/:id", function (req, res) {
+    db.Department.findOne({ where: { id: req.params.id } }).then(function (DepartmentId) {
+      res.render("posts", {
+        Department: DepartmentId
       });
     });
   });
@@ -92,15 +112,17 @@ module.exports = function (app, passport) {
 
 
   // Load example page and pass in an example by id
-  app.get("/store/", function (req, res) {
-    db.Example.findOne({
+  app.get("/department/", function (req, res) {
+    db.Department.findOne({
       where: {
         id: req.params.id
       }
-    }).then(function (dbExample) {
-      res.render("store", {
-        example: dbExample
+    }).then(function (dbDepartment) {
+      res.render("posts", {
+        text: dbDepartment
       });
+      console.log(dbDepartment);
+      
     });
   });
 

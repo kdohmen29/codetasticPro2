@@ -39,7 +39,7 @@ $(document).ready(function() {
       var newTr = $("<tr>");
       newTr.data("department", departmentData);
       newTr.append("<td>" + departmentData.text + "</td>");
-      newTr.append("<td><a href='/api/departments/:" + departmentData.id + "'>Go to Posts</a></td>");
+      newTr.append("<td><a href='/api/departments/" + departmentData.id + "'>Go to Posts</a></td>");
       return newTr;
     }
   

@@ -14,16 +14,20 @@ $(document).ready(function () {
         }
         // Constructing a newPost object to hand to the database
         var newPost = {
-          title: titleInput
+          item: titleInput
             .val()
             .trim(),
-          body: descriptionInput
+          description: descriptionInput
             .val()
             .trim(),
           DepartmentId: departmentSelect.val()
         };
         console.log(event.target);
         console.log(newPost);
+        $.post("/api/createpost", newPost, function(data){
+          console.log(data);
+          
+        })
 
       }
     });
